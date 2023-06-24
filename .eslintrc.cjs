@@ -5,6 +5,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     '@vue/typescript/recommended',
+    'prettier',
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -12,9 +13,10 @@ module.exports = {
   rules: {
     // タグの最後で改行しないで
     'vue/html-closing-bracket-newline': [
-      2,
+      1,
       {
-        multiline: 'never',
+        singleline: 'never',
+        multiline: 'always',
       },
     ],
     // 不要なカッコは消す
