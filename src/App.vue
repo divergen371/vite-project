@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
+import axios from 'axios'
 type typeOfFeatures = {
   Sex: '男性' | '女性' | '性別は？'
   Pclass: string | '階級は？'
@@ -16,14 +17,45 @@ const features = reactive<typeOfFeatures>({
   SibSp: '兄弟姉妹の同伴者数は？',
 })
 
+const survivalProbability = ref<number | undefined>()
+
+const validateRequestValues = (): boolean => {
+  if (features.Sex == '性別は？') {
+    alert('性別を入力してください。')
+    return false
+  }
+  if (features.Pclass == '階級は？') {
+    alert('階級を入力してください。')
+    return false
+  }
+  if (features.Age == '年齢は？') {
+    alert('年齢を入力してください。')
+    return false
+  }
+  if (features.Parch == '親・子の同伴者数は？') {
+    alert('親子同伴者数を入力してください。')
+    return false
+  }
+  if (features.SibSp == '兄弟姉妹の同伴者数は？') {
+    alert('兄弟姉妹同伴者数を入力してください。')
+    return false
+  }
+  return true
+}
+
 const displayOutput = (): void => {
-  alert(`
-    性別: ${features.Sex}
-    階級: ${features.Pclass}
-    年齢: ${features.Age}
-    親・子の同伴者数: ${features.Parch}
-    兄弟姉妹の同伴者数: ${features.SibSp}
-  `)
+  const endPoint = 'http://localhost:8080/api/titanic'
+  const validationResult: boolean = validateRequestValues()
+  if (validationResult === true) {
+    axios
+      .post(endPoint, features)
+      .then((response) => {
+        survivalProbability.value = (100 * response.data.survival_probability) as number
+      })
+      .catch(() => {
+        alert('エラーが発生しました。')
+      })
+  }
 }
 </script>
 
@@ -69,5 +101,8 @@ const displayOutput = (): void => {
     人
     <br />
     <button class="btn btn-primary" @click="displayOutput()">結果を出力</button>
+    <template v-if="survivalProbability !== undefined">
+      <div class="alert alert-error mt-4">あなたの生存確率は{{ Math.round(survivalProbability) }}%です。</div>
+    </template>
   </div>
 </template>
