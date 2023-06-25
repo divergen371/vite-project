@@ -1,12 +1,7 @@
 module.exports = {
   root: true,
   plugins: ['vue', 'html', '@typescript-eslint'],
-  extends: [
-    'plugin:vue/vue3-recommended',
-    'eslint:recommended',
-    '@vue/typescript/recommended',
-    'prettier',
-  ],
+  extends: ['plugin:vue/vue3-recommended', 'eslint:recommended', '@vue/typescript/recommended', 'prettier'],
   parserOptions: {
     ecmaVersion: 12,
   },
@@ -16,7 +11,7 @@ module.exports = {
       1,
       {
         singleline: 'never',
-        multiline: 'always',
+        multiline: 'never',
       },
     ],
     // 不要なカッコは消す

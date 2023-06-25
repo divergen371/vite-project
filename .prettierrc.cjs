@@ -9,4 +9,6 @@ module.exports = {
   singleQuote: true,
   printWidth: 120,
   allowParens: 'avoid',
+  bracketSameLine: true,
+  htmlWhitespaceSensitivity: 'ignore',
 }
