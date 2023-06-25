@@ -2,7 +2,7 @@
 import { reactive } from 'vue'
 type typeOfFeatures = {
   Sex: '男性' | '女性' | '性別は？'
-  Pclass: string
+  Pclass: string | '階級は？'
   Age: number | '年齢は？'
   Parch: number | '親・子の同伴者数は？'
   SibSp: number | '兄弟姉妹の同伴者数は？'
@@ -15,6 +15,16 @@ const features = reactive<typeOfFeatures>({
   Parch: '親・子の同伴者数は？',
   SibSp: '兄弟姉妹の同伴者数は？',
 })
+
+const displayOutput = (): void => {
+  alert(`
+    性別: ${features.Sex}
+    階級: ${features.Pclass}
+    年齢: ${features.Age}
+    親・子の同伴者数: ${features.Parch}
+    兄弟姉妹の同伴者数: ${features.SibSp}
+  `)
+}
 </script>
 
 <template>
@@ -58,6 +68,6 @@ const features = reactive<typeOfFeatures>({
     </select>
     人
     <br />
-    <button class="btn btn-primary">結果を出力</button>
+    <button class="btn btn-primary" @click="displayOutput()">結果を出力</button>
   </div>
 </template>
