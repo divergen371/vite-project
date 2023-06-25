@@ -16,6 +16,31 @@
       <option>下層クラス（労働階級）</option>
     </select>
     <br />
+    <select class="select select-primary mb-4">
+      <option disabled selected>年齢は？</option>
+      // eslint-disable-next-line vue/require-v-for-key
+      <option v-for="i in [...Array(121).keys()]">
+        {{ i }}
+      </option>
+    </select>
+    歳
+    <br />
+    <select class="select select-primary mb-4">
+      <option disabled selected>親・子の同伴者数は？</option>
+      // eslint-disable-next-line vue/require-v-for-key
+      <option v-for="i in [...Array(11).keys()]">
+        {{ i }}
+      </option>
+    </select>
+    人
+    <br />
+    <select class="select select-primary mb-4">
+      <option disabled selected>兄弟姉妹の同伴者数は？</option>
+      // eslint-disable-next-line vue/require-v-for-key
+      <option v-for="i in [...Array(11).keys()]">{{ i }}</option>
+    </select>
+    人
+    <br />
     <button class="btn btn-primary">結果を出力</button>
   </div>
 </template>
